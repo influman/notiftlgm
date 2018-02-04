@@ -1,0 +1,75 @@
+{
+	"plugin_id": "notiftlgm",
+	"name_fr": "Notifications IFTTT",
+	"icon": "notiftlgm.png",
+	"version": "1.1",
+	"creation_date": "2018-01-24",
+	"modification_date": "2018-02-03",
+	"author": "Influman",
+	"description_fr": "Notifications via <a href='https://ifttt.com'>IFTTT</a> pour <a href='https://telegram.org'>Telegram</a> ou <a href='https://twitter.com/'>Twitter</a><br>Compatible chatBOT et ASK",
+	"description_en": "",
+	"description_es": "",
+	"description_it": "",
+	"description_de": "",
+	"forum_link": "http://forum.eedomus.com/viewtopic.php?f=50&t=6653",
+	"parameters": 
+	[
+		{
+			"parameter": "usage", 
+			"description": "Usage IFTTT",
+			"xtype": "combo",
+			"default_value": "Telegram",
+            "field": "width:110, allowBlank:false, store:['Telegram', 'Twitter', 'Push IFTTT'], editable: false, shadow: true, triggerAction: 'all', typeAhead:true"
+        },
+		{
+			"parameter": "IFTTT_KEY", 
+			"description": "Key Webhooks IFTTT :",
+			"xtype": "textfield",
+			"default_value": "",
+			"field": "width:250, allowBlank:false"
+        },
+		{
+			"parameter": "IFTTT_EVENT", 
+			"description": "Event Webhooks IFTTT:",
+			"xtype": "textfield",
+			"default_value": "Telegram_eedomus",
+			"field": "width:250, allowBlank:false"
+        }
+	 ],
+	"scripts":
+	[
+		{
+			"name": "notiftlgm.php"
+		}
+	],
+	"devices":
+    [
+		{
+			"device_id": "notif",
+			"module_id": "41",
+			"type": "http",
+			"name_fr": "Notifications plugin.parameters.usage",
+			"icon": "notiftlgm.png",
+			"utilisation_id": "43",
+			"parameters":
+			{
+				"VAR1": "plugin.parameters.IFTTT_KEY",
+				"VAR2": "plugin.parameters.IFTTT_EVENT",
+				"VAR3": "Code API Output (facultatif)",
+				"value_type": "list",
+				"ignore_errors": 3,
+				"RAW_URL": "",
+				"RAW_XPATH": "",
+				"POLLING": "0"
+			},
+			"values":
+			[
+				{ "value": "1", "description": "[B]Météo du jour [/B][BR][PERIPH_ID][BR][PERIPH_ID]", "icon": "notiftlgm.png", "http_url": "http://localhost/script/?exec=notiftlgm.php", "http_type": "GET",  "http_params": "&value=[RAW_VALUE]&key=[VAR1]&event=[VAR2]&chatbot=[VAR3]" },
+				{ "value": "2", "description": "[PERIPH_ID] °C [I]le [DATE] [TIME][/I]", "icon": "notiftlgm.png", "http_url": "http://localhost/script/?exec=notiftlgm.php", "http_type": "GET",  "http_params": "&value=[RAW_VALUE]&key=[VAR1]&event=[VAR2]&chatbot=[VAR3]" },
+				{ "value": "9999", "description": "[CHATBOT]", "hidden": 1, "icon": "notiftlgm.png", "http_url": "http://localhost/script/?exec=notiftlgm.php", "http_type": "GET",  "http_params": "&value=[RAW_VALUE]&key=[VAR1]&event=[VAR2]&chatbot=[VAR3]" },
+				{ "value": "99999", "description": "[ASK]", "hidden": 1, "icon": "notiftlgm.png", "http_url": "http://localhost/script/?exec=notiftlgm.php", "http_type": "GET",  "http_params": "&value=[RAW_VALUE]&key=[VAR1]&event=[VAR2]&chatbot=[VAR3]" }
+			]
+		}
+		
+	]
+}
