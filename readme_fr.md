@@ -80,4 +80,11 @@ Lancez ensuite vos notifications depuis vos règles.
 NB : Les caractères spéciaux sont remplacés automatiquement, et le caractère ° est remplacé par ' (incompatibilité avec IFTTT...)  
   
 ![STEP2](https://i.imgur.com/HD1DoXS.png) 
+  
+  
+
+Influman 2018  
+therealinfluman@gmail.com  
+[Paypal Me](https://www.paypal.me/influman "paypal.me")  
+  
 
