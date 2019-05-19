@@ -1,17 +1,17 @@
 <?php
    $xml = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\" ?>";      
    //***********************************************************************************************************************
-   // V1.1 : Notification via Webhooks IFTTT (Telegram, Twitter, Notifications, etc.). Compatible Chatbot et Ask
+   // V1.2 : Notification via Webhooks IFTTT (Telegram, Twitter, Notifications, etc.). Compatible Chatbot et Ask
    
 	// recuperation des infos depuis la requete
-    $value = getArg("value");
-	$key = getArg("key");
-	$event = getArg("event");
+    $value = getArg("value", true);
+	$key = getArg("key", false);
+	$event = getArg("event", false);
 	$periph_id = getArg('eedomus_controller_module_id'); 
-	$chatbot_output = getArg("chatbot");
+	$chatbot_output = getArg("chatbot", false);
 	
 	$notif = "";
-	if ($value != "" && $value >= 0 && $key != "plugin.parameters.IFTTT_KEY" && $event != "plugin.parameters.IFTTT_EVENT") {
+	if ($value != "" && is_numeric($value) && $value >= 0 && $key != "plugin.parameters.IFTTT_KEY" && $event != "plugin.parameters.IFTTT_EVENT") {
 		// récupérer description de l'actionneur déclenché
 		$tab_value = getPeriphValueList($periph_id);
 		foreach($tab_value As $tab_notif_value) {
@@ -134,9 +134,16 @@
 		}
 		$url = "http://maker.ifttt.com/trigger/".$event."/with/key/".$key."?value1=".$value1;
 		httpQuery($url,'GET'); 	
-		
+		die();
 	}
-
+	
+	if ($value == "polling") {
+		$xml .= "<NOTIFTLGM><STATUS>0</STATUS></NOTIFTLGM>";
+		sdk_header('text/xml');
+		echo $xml;    
+		die();
+	}
+	
 	function sdk_noaccent($text) {
 		$utf8_keys = array(	'/[áàâãä]/','/[ÁÀÂÃÄ]/', '/[ÍÌÎÏ]/', '/[íìîï]/', '/[éèêë]/', '/[ÉÈÊË]/', '/[óòôõö]/', '/[ÓÒÔÕÖ]/', '/[úùûü]/', '/[ÚÙÛÜ]/' ,	'/ç/', '/Ç/', '/ñ/', '/Ñ/');
 		$utf8_values = array('a', 'A', 'I',	'i', 'e', 'E', 'o',	'O', 'u', 'U', 'c',	'C', 'n', 'N');
@@ -145,13 +152,12 @@
 	
 	function sdk_fullescape($in)
 	{
-  $out = urlencode($in);
-  
-  $out = str_replace('+','%20',$out);
-  $out = str_replace('_','%5F',$out);
-  $out = str_replace('.','%2E',$out);
-  $out = str_replace('-','%2D',$out);
-  $out = str_replace('%B0','%27',$out);
-  return $out;
+		$out = urlencode($in);
+		$out = str_replace('+','%20',$out);
+		$out = str_replace('_','%5F',$out);
+		$out = str_replace('.','%2E',$out);
+		$out = str_replace('-','%2D',$out);
+		$out = str_replace('%B0','%27',$out);
+	return $out;
 	} 
 ?>

@@ -2,9 +2,9 @@
 	"plugin_id": "notiftlgm",
 	"name_fr": "Notifications IFTTT",
 	"icon": "notiftlgm.png",
-	"version": "1.11",
+	"version": "1.2",
 	"creation_date": "2018-01-24",
-	"modification_date": "2018-03-20",
+	"modification_date": "2019-05-02",
 	"author": "Influman",
 	"description_fr": "Notifications via <a href='https://ifttt.com'>IFTTT</a> pour <a href='https://telegram.org'>Telegram</a> ou <a href='https://twitter.com/'>Twitter</a><br>Compatible chatBOT et ASK",
 	"description_en": "",
@@ -58,12 +58,13 @@
 				"VAR3": "Code API Output (facultatif)",
 				"value_type": "list",
 				"ignore_errors": 3,
-				"RAW_URL": "",
-				"RAW_XPATH": "",
-				"POLLING": "0"
+				"RAW_URL": "http://localhost/script/?exec=notiftlgm.php&value=polling",
+				"RAW_XPATH": "/NOTIFTLGM/STATUS",
+				"POLLING": "1"
 			},
 			"values":
 			[
+				{ "value": "0", "description": "Ready", "hidden": 1, "icon": "notiftlgm.png", "http_url": "http://localhost/script/?exec=notiftlgm.php", "http_type": "GET",  "http_params": "&value=void" },
 				{ "value": "1", "description": "[B]Météo du jour [/B][BR][PERIPH_ID][BR][PERIPH_ID]", "icon": "notiftlgm.png", "http_url": "http://localhost/script/?exec=notiftlgm.php", "http_type": "GET",  "http_params": "&value=[RAW_VALUE]&key=[VAR1]&event=[VAR2]&chatbot=[VAR3]" },
 				{ "value": "2", "description": "[PERIPH_ID] °C [I]le [DATE] [TIME][/I]", "icon": "notiftlgm.png", "http_url": "http://localhost/script/?exec=notiftlgm.php", "http_type": "GET",  "http_params": "&value=[RAW_VALUE]&key=[VAR1]&event=[VAR2]&chatbot=[VAR3]" },
 				{ "value": "9999", "description": "[CHATBOT]", "hidden": 1, "icon": "notiftlgm.png", "http_url": "http://localhost/script/?exec=notiftlgm.php", "http_type": "GET",  "http_params": "&value=[RAW_VALUE]&key=[VAR1]&event=[VAR2]&chatbot=[VAR3]" },
